@@ -34,7 +34,7 @@ select * from (select empname,dept_id, salary,
 SELECT empname , dense_rank() over (ORDER BY salary desc) as rnk FROM employee;
 
 -- 2nd highest salary based on department 
-select empname from ( SELECT empname , dense_rank() over (ORDER BY salary desc) as rnk FROM employee) tmp  where tmp.rnk = 2  ;
+select empname, salary, dept_id from ( SELECT empname, salary, dept_id , dense_rank() over (partition by dept_id ORDER BY salary desc) as rnk FROM employee) tmp  where tmp.rnk = 2  ;
 
 
 -- 2nd highest salary based on department  with department info (name )
